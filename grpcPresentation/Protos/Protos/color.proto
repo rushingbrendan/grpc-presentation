@@ -1,0 +1,84 @@
+﻿
+// gRPC Reference Link
+// https://developers.google.com/protocol-buffers/docs/proto3
+
+// Set proto file syntax. 
+// Without this it will default to proto2 syntax.
+syntax = "proto3";
+
+// Set C# namespace for C# generated classes from .proto file.
+option csharp_namespace = "Protos";
+
+
+// ColorService Interface
+service ColorService
+{	
+	rpc SendColor (SendColorRequest) returns (SendColorResponse);
+	rpc CommunicationStream (stream StartStream) returns (stream CommunicationResponse);	
+}
+
+message StartStream
+{
+
+}
+
+message SendColorRequest
+{
+	oneof Request
+	{
+		RedMessage RedMessage = 1;
+		GreenMessage GreenMessage = 2;
+		YellowMessage YellowMessage = 3;
+		OrangeMessage OrangeMessage = 4;
+	}
+}
+
+message SendColorResponse
+{
+	bool Successs = 1;
+}
+
+message RedMessage
+{
+
+}
+
+message GreenMessage
+{
+
+}
+
+message YellowMessage
+{
+
+}
+
+message OrangeMessage
+{
+
+}
+
+message CommunicationResponse
+{
+	oneof Response
+	{
+		ColorReceived ColorReceived = 1;
+		GameCompleted GameCompleted = 2;
+	}
+}
+
+message ColorReceived
+{
+	oneof Color
+	{
+		RedMessage RedMessage = 1;
+		GreenMessage GreenMessage = 2;
+		YellowMessage YellowMessage = 3;
+		OrangeMessage OrangeMessage = 4;
+	}
+}
+
+message GameCompleted
+{
+	string message = 1;
+}

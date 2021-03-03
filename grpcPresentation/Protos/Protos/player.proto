@@ -1,0 +1,69 @@
+﻿
+// gRPC Reference Link
+// https://developers.google.com/protocol-buffers/docs/proto3
+
+// Set proto file syntax. 
+// Without this it will default to proto2 syntax.
+syntax = "proto3";
+
+// Set C# namespace for C# generated classes from .proto file.
+option csharp_namespace = "Protos";
+
+
+// Player Service Interface
+service PlayerService
+{	
+	rpc AddPlayer (AddPlayerRequest) returns (AddPlayerResponse);
+	rpc GetPlayers (Empty) returns (GetPlayersResponse);
+}
+
+message Empty
+{
+
+}
+
+message AddPlayerRequest
+{
+	Player Player = 1;
+}
+
+message AddPlayerResponse
+{
+	bool Success = 1;
+}
+
+message Player
+{
+	int32 Id = 1;
+	DateOfBirth DateOfBirth = 2;
+	string firstName = 3;
+	string lastName = 4;
+}
+
+message DateOfBirth
+{
+	int32 Day = 1;
+	Month Month = 2;
+	int32 Year = 3;
+}
+
+enum Month
+{
+	January = 0;
+	February = 1;
+	March = 2;
+	April = 3;
+	May = 4;
+	June = 5;
+	July = 6;
+	August = 7;
+	September = 8;
+	October = 9;
+	November = 10;
+	December = 11;
+}
+
+message GetPlayersResponse
+{
+	repeated Player Players = 1;
+}
